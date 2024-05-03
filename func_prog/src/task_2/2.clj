@@ -16,7 +16,7 @@
 ; Генерация бесконечной последовательности
 (def primes (sieve (iterate inc 2)))
 
-(defn print-first-n [seq n]
+(defn print-nth-prime [seq n]
   (println (nth seq n)))
 
-(print-first-n primes 30)
+(print-nth-prime primes 30)

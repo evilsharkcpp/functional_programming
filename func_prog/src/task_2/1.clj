@@ -30,9 +30,9 @@
 (nth-prime 2000)
 
 ; Печать списка простых чисел до заданного числа
-(defn print-primes-up-to [n]
+(defn print-primes [n]
   (let [primes (sieve-of-eratosthenes n)]
     (println "Простые числа до" n ":" primes)
     primes))
 
-(print-primes-up-to 30)
+(print-primes 30)
