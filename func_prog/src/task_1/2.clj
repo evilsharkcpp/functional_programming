@@ -1,7 +1,7 @@
 (ns task-1.2
   (:use task-1.params))
 ; Задача 1.2.
-; Перепишите программу 1.1. так, чтобы все рекурсивныевызовы были хвостовыми
+; Перепишите программу 1.1. так, чтобы все рекурсивные вызовы были хвостовыми
 (load-file "params.clj")
 
 ;; добавляет элементы списка l к концу строки s
@@ -36,15 +36,17 @@
   )
 
 (defn task-1-2
-  ([alp i acc]
+  ([alp acc i]
    ; пока не достигли нужной длины сочетаний
    (if (> i 1)
      (recur alp
-            (dec i)
-            (make-list-of-strings alp acc))
+            (make-list-of-strings alp acc)
+            (dec i))
      acc))
   ([alp i]
-   (task-1-2 alp i alp))
+   (if (> i 0)
+     (task-1-2 alp alp i)
+     '()))
   )
 
 (println "\nRun task")

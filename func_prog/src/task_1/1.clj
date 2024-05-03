@@ -43,7 +43,9 @@
      (make-list-of-strings alp (task-1-1 alp l (dec i)))
      l))
   ([alp i]
-   (task-1-1 alp alp i))
+   (if (> i 0)
+   (task-1-1 alp alp i)
+   '()))
   )
 
 (println "\nRun task")

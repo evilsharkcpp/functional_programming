@@ -8,28 +8,29 @@
 
 ; добавляет отфильтрованные элементы списка l к концу строки s
 (defn append-letter[s l]
-  ;сокращение для определения анонимной функции + сокращение для аргументов
-  (map #(str s (first %))
-       (filter #(not= (str(last s)) %) l )
+  (map (fn [letters] (str s (first letters)))
+       (filter (fn [letter] (not= (str(last s)) letter)) l )
        ))
 
 (defn make-list-of-strings[alp l]
   ; reduce нужен, чтобы "выпрямить массив"
   ; ((a b) (c d) (e f)) => (a b c d e f)
   (reduce concat
-          (map #(append-letter % alp) l)
+          (map (fn [s] (append-letter s alp)) l)
           ))
 
 (defn task-1-4
-  ([alp i acc]
+  ([alp acc i]
    ; пока не достигли нужной длины сочетаний
    (if (> i 1)
      (recur alp
-            (dec i)
-            (make-list-of-strings alp acc))
+            (make-list-of-strings alp acc)
+            (dec i))
      acc))
   ([alp i]
-   (task-1-4 alp i alp))
+   (if (> i 0)
+     (task-1-4 alp alp i)
+     '()))
   )
 
 (println "\nRun task")

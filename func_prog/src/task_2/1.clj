@@ -24,7 +24,7 @@
 ; Нахождение n-го простого числа
 (defn nth-prime [n]
   (let [prime (nth (sieve-of-eratosthenes max-num) (dec n))]
-    (println "N-th prime:" prime)
+    (println "N-е простое число:" prime)
     prime))
 
 (nth-prime 2000)
@@ -32,7 +32,7 @@
 ; Печать списка простых чисел до заданного числа
 (defn print-primes-up-to [n]
   (let [primes (sieve-of-eratosthenes n)]
-    (println "Primes up to" n ":" primes)
+    (println "Простые числа до" n ":" primes)
     primes))
 
 (print-primes-up-to 30)

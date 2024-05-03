@@ -19,5 +19,5 @@
                    acc))
                []
                l)))
-(println (my-filter (fn [x] (not= 0 (mod x 3)))
+(println (my-filter (fn [x] (not= 0 (mod x 2)))
                      (list 1 2 3 4)))
