@@ -22,11 +22,10 @@
 (defn task-1-4
   ([alp acc i]
    ; пока не достигли нужной длины сочетаний
-   (if (> i 1)
-     (recur alp
-            (make-list-of-strings alp acc)
-            (dec i))
-     acc))
+   (reduce (fn [acc i]
+             (make-list-of-strings alp acc)
+             ) alp (range 1 N))
+   )
   ([alp i]
    (if (> i 0)
      (task-1-4 alp alp i)
