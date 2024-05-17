@@ -38,15 +38,15 @@
     )
   )
 
-(defn sqr [x] (Thread/sleep 1) (* x x))
+(defn sqr [x] (* x x))
 (defn memoized-integral [func x h]
   ((get-antiderivative sqr h) x)
   )
 
 (defn -main [& args]
-  (time (integral sqr 0 1 0.05))
-  (time (memoized-integral sqr 1 0.05))
-  (time (integral sqr 0 0.5 0.05))
-  (time (memoized-integral sqr 0.5 0.05))
+  (time (integral sqr 0 50 0.5))
+  (time (memoized-integral sqr 50 0.5))
+  (time (integral sqr 0 5 0.5))
+  (time (memoized-integral sqr 5 0.5))
   (shutdown-agents)
   )

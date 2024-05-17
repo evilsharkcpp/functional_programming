@@ -25,15 +25,15 @@
   (fn [x] (get-antiderivative-value func h (int (/ x h))))
   )
 
-(defn sqr [x] (Thread/sleep 1) (* x x))
+(defn sqr [x]  (* x x))
 (defn lazy-integral [func x h]
   ((get-antiderivative func h) x)
   )
 
 (defn -main [& args]
-  (time (integral sqr 0 1 0.05))
-  (time (lazy-integral sqr 1 0.05))
-  (time (integral sqr 0 0.5 0.05))
-  (time (lazy-integral sqr 0.5 0.05))
+  (time (integral sqr 0 50 0.05))
+  (time (lazy-integral sqr 50 0.05))
+  (time (integral sqr 0 5 0.05))
+  (time (lazy-integral sqr 5 0.05))
   (shutdown-agents)
   )
