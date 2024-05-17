@@ -17,7 +17,6 @@
 (defn get-antiderivative-value [func h idx]
   (->>
     (reductions (fn [sum x] (trapezoid func (* h x) (* h (inc x)))) 0 (range 0 idx))
-    (doall)
     (apply +)
     )
   )
