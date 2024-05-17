@@ -26,7 +26,7 @@
   (fn [x] (get-antiderivative-value func h (int (/ x h))))
   )
 
-(defn sqr [x] x)
+(defn sqr [x] (Thread/sleep 1) (* x x))
 (defn lazy-integral [func x h]
   ((get-antiderivative func h) x)
   )

@@ -23,26 +23,30 @@
     0
     ) )
 
-(def trapezoid-mem (memoize trapezoid))
-
-(defn integral-mem [f a b h]
-  (if (< a b)
-    (+
-      (trapezoid-mem f a (+ a h))
-      (integral f (+ a h) b h)
-      )
+(defn get-antiderivative-value [func h self-memoized idx]
+  (if (= idx 0)
     0
+    (+ (self-memoized func h self-memoized (dec idx))
+       (trapezoid func (* h (dec idx)) (* h idx))
+       )
     )
   )
 
-(defn f-linear [x] x)
-(defn f-parabola [x] (* x x))
-(defn f-polinom [x] (- (* x x) (* 3 x) 1))
+(defn get-antiderivative [func h]
+  (let [get-antiderivative-value-memoized (memoize get-antiderivative-value)]
+    (fn [x] (get-antiderivative-value-memoized func h get-antiderivative-value-memoized (int (/ x h))))
+    )
+  )
 
+(defn sqr [x] (Thread/sleep 1) (* x x))
+(defn memoized-integral [func x h]
+  ((get-antiderivative sqr h) x)
+  )
 
 (defn -main [& args]
-  (time (integral f-polinom 0 50 0.05))
-  (time (integral f-polinom 50 100 0.05))
-  (time (integral-mem f-polinom -100 -50 0.05))
-  (time (integral-mem f-polinom -50 0 0.05))
+  (time (integral sqr 0 1 0.05))
+  (time (memoized-integral sqr 1 0.05))
+  (time (integral sqr 0 0.5 0.05))
+  (time (memoized-integral sqr 0.5 0.05))
+  (shutdown-agents)
   )
