@@ -1,5 +1,5 @@
+(ns task-3.2-with-let)
 ; Задача 3.2 использоватль последовательность вместо мемоизации
-(ns task-3.2)
 
 (defn trapezoid [f a b]
   ; h = b - a
@@ -19,13 +19,16 @@
   )
 
 (defn get-antiderivative [func h]
-  (fn [x] (nth (get-antiderivative-value func h) (int (/ x h))))
+  (let [t (get-antiderivative-value func h)]
+    (fn [x] (nth t (int (/ x h))))
+    )
   )
 
 (defn sqr [x] (* x x))
 (defn lazy-integral [func x h]
   ((get-antiderivative func h) x)
   )
+(def sqr-antider-lazy (get-antiderivative sqr 0.05))
 (defn -main [& args]
   (time (integral sqr 0 50 0.05))
   (time (lazy-integral sqr 50 0.05))
